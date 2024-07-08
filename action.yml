@@ -23,7 +23,6 @@ runs:
       # TFLint - Terraform Check
       - uses: actions/cache@v4
         name: Cache plugin dir
-        working-directory: ${{ inputs.working_directory }}
         with:
           path: ~/.tflint.d/plugins
           key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
