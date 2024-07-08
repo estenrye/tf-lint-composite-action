@@ -25,6 +25,7 @@ runs:
 
       # TFLint - Terraform Check
       - uses: actions/cache@v4
+        working-directory: ${{ inputs.working_directory }}
         name: Cache plugin dir
         with:
           path: ~/.tflint.d/plugins
