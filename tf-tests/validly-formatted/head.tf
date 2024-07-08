@@ -1,4 +1,5 @@
 terraform {
+  required_version = ">= 0.13"
   required_providers {
     http = {
       source = "hashicorp/http"
@@ -14,4 +15,8 @@ provider "http" {
 data "http" "example_head" {
   url    = "https://checkpoint-api.hashicorp.com/v1/check/terraform"
   method = "HEAD"
+}
+
+output "example_head" {
+  value = data.http.example_head.headers
 }
