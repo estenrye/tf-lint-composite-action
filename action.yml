@@ -13,6 +13,9 @@ inputs:
     description: 'The version of TF-Lint to use'
     required: true
     default: latest
+  github_token:
+    description: 'The GitHub token to use'
+    required: true
 runs:
     using: 'composite'
     steps:
@@ -30,7 +33,7 @@ runs:
       - uses: terraform-linters/setup-tflint@v4
         name: Setup TFLint
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ inputs.github_token }}
           tflint_version: ${{ inputs.tflint_version }}
         
       # Print TFLint version
