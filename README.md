@@ -19,6 +19,7 @@ jobs:
       with:
         working_directory: './tf-tests/validly-formatted'
         terraform_version: 'latest'
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Inputs
@@ -27,6 +28,7 @@ jobs:
 |------|-------------|----------|---------|
 | `working_directory` | The directory to run `terraform fmt` in. | No | `.` |
 | `tflint_version` | The version of tf-lint to use. | No | `latest` |
+| `github_token` | The GitHub token to use for the `tflint` action. | Yes | N/A |
 
 ## Build Integration Pipeline Componenets Used
 
