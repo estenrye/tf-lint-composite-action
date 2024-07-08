@@ -30,7 +30,7 @@ runs:
       - uses: terraform-linters/setup-tflint@v4
         name: Setup TFLint
         with:
-          github_token: ${{ secrets.CI_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           tflint_version: ${{ inputs.tflint_version }}
         
       # Print TFLint version
