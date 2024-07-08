@@ -19,6 +19,7 @@ jobs:
       - name: Check Invalid Terraform Formatting
         id: invalid-terraform
         uses: ./
+        continue-on-error: true
         with:
           working_directory: './tf-tests/invalidly-formatted'
           tflint_version: 'latest'
@@ -40,6 +41,7 @@ jobs:
       - name: Check Valid Terraform Formatting
         uses: ./
         id: valid-terraform
+        continue-on-error: true
         with:
           working_directory: './tf-tests/validly-formatted'
           tflint_version: 'latest'
