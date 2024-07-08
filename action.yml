@@ -1,0 +1,52 @@
+name: TF Lint
+author: Esten Rye
+description: Check Terraform code lint
+branding:
+  icon: check-circle
+  color: blue
+inputs:
+  working_directory:
+    description: 'The directory where Terraform files are located'
+    required: false
+    default: '.'
+  tflint_version:
+    description: 'The version of TF-Lint to use'
+    required: true
+    default: latest
+runs:
+    using: 'composite'
+    steps:
+      # Checkout Repository
+      - name : Check out Git Repository
+        uses: actions/checkout@v4  
+
+      # TFLint - Terraform Check
+      - uses: actions/cache@v4
+        name: Cache plugin dir
+        working-directory: ${{ inputs.working_directory }}
+        with:
+          path: ~/.tflint.d/plugins
+          key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
+
+      - uses: terraform-linters/setup-tflint@v4
+        name: Setup TFLint
+        with:
+          github_token: ${{ secrets.CI_GITHUB_TOKEN }}
+          tflint_version: ${{ inputs.tflint_version }}
+        
+      # Print TFLint version
+      - name: Show version
+        shell: bash
+        run: tflint --version
+
+      # Install plugins
+      - name: Init TFLint
+        shell: bash
+        working-directory: ${{ inputs.working_directory }}
+        run: tflint --init
+
+      # Run tflint command in each directory recursively # use --force if you want to continue with workflow although errors are there
+      - name: Run TFLint
+        shell: bash
+        working-directory: ${{ inputs.working_directory }}
+        run: tflint -f compact --recursive
