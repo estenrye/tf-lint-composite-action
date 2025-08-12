@@ -30,7 +30,7 @@ runs:
           path: ~/.tflint.d/plugins
           key: ${{ matrix.os }}-tflint-${{ hashFiles(format('{0}/{1}', inputs.working_directory, '.tflint.hcl')) }}
 
-      - uses: terraform-linters/setup-tflint@v4
+      - uses: terraform-linters/setup-tflint@v5
         name: Setup TFLint
         with:
           github_token: ${{ inputs.github_token }}
