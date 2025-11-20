@@ -21,7 +21,7 @@ runs:
     steps:
       # Checkout Repository
       - name : Check out Git Repository
-        uses: actions/checkout@v5  
+        uses: actions/checkout@v6  
 
       # TFLint - Terraform Check
       - uses: actions/cache@v4
